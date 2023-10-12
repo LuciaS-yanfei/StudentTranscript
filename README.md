@@ -29,12 +29,14 @@ looking user interface that is easier to navigate.
 ## User Stories
 
 - As a user, I want to be able to add a new course to my transcript list and specify course information, for example 
-course number, worth credits, professor's name, etc.
+course number, worth credits, course average, etc.
 - As a user, I want to be able to view the list of courses on my transcript list.
-- As a user, I want to be able to delete a course from my transcript list.
-- As a user, I want to be able to mark a course as completed and specify my final grade and course average on my 
-transcript list.
-- As a user, I want to be able to select a course on my transcript list and view the course information.
-- As a user, I want to be able to select a term and list all the courses I have in that term.
-- As a user, I want to be able to see the calculated average for all the courses or for semesters, 
-in percentage scale (100%) and GPA equivalent on a 4.33 scale.
+- As a user, I want to be able to remove a course from my transcript list.
+- As a user, I want to be able to select a semester and list all the courses information I have in that semester.
+- As a user, I want to be able to see the calculated average for all the courses or for semesters / overall, 
+in percentage scale (100%).
+- As a user, I want to be able to add a award I won to my transcript and specify award information, for example
+date, award name, prize won.
+- As a user, I want to be able to remove a award from my transcript.
+- As a user, I want to be able to view the list of my awards on my transcript list.
+- As a user, I want to be abe to know how much money I won in total.
