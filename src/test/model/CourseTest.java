@@ -38,7 +38,8 @@ public class CourseTest {
         assertEquals(90, testCourse.getGrade());
         assertEquals(90, testCourse.getCourseAverage());
 
-
     }
+
+
 
 }

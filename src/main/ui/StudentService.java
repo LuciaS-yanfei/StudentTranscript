@@ -15,6 +15,8 @@ public class StudentService {
         runStudentService();
     }
 
+    // MODIFIES: this
+    // EFFECTS: processes user input
     private void runStudentService() {
         boolean keepGoing = true;
         String command = null;
@@ -37,7 +39,7 @@ public class StudentService {
     }
 
     // MODIFIES: this
-    // EFFECTS: initializes accounts
+    // EFFECTS: initializes a student transcript and several awards and courses
     private void init() {
         myTranscript = new StudentTranscript("Lucia", 68849942);
 
@@ -114,6 +116,7 @@ public class StudentService {
         System.out.println("\nCourse successfully added! ");
     }
 
+    // REQUIRES: course to remove is already in the list
     // MODIFIES: this
     // EFFECTS: Remove a course from my transcript
     private void doRemoveCourse() {
@@ -147,6 +150,7 @@ public class StudentService {
         System.out.println("\nAward successfully added! ");
     }
 
+    // REQUIRES: award to remove is already in the transcript
     // MODIFIES: this
     // EFFECTS: Remove an award from my transcript
     private void doRemoveAward() {
@@ -172,17 +176,19 @@ public class StudentService {
     }
 
     // MODIFIES: this
-    // EFFECTS: get Course Information of selected time period
+    // EFFECTS: conducts a course information display
     private void doCourseInformation() {
         StudentTranscript selected = selectPeriod();
         printCourseInformation(selected);
+        System.out.println("Above are course information");
     }
 
     // MODIFIES: this
-    // EFFECTS: get Course Information of selected time period
+    // EFFECTS: conducts a transcript display
     private void doTranscript() {
         StudentTranscript selected = selectPeriod();
         printTranscript(selected);
+        System.out.println("That's the end of your transcript");
     }
 
     // MODIFIES: this
@@ -190,9 +196,10 @@ public class StudentService {
     private void doAwardList() {
         printAwards(myTranscript);
         printMoney(myTranscript);
+        System.out.println("That's all for award information");
     }
 
-    // EFFECTS: prompts user to select chequing or savings account and returns it
+    // EFFECTS: prompts user to select overall or semester(and specify which) and returns it
     private StudentTranscript selectPeriod() {
         String selection = "";  // force entry into loop
         String selectSemester = "";
@@ -220,7 +227,7 @@ public class StudentService {
         System.out.println("Your GPA is " + selected.getAverage());
     }
 
-    // EFFECTS: prints Course Information of selected time period to the screen
+    // EFFECTS: prints course Information of selected time period to the screen
     private void printCourseInformation(StudentTranscript selected) {
         for (Course next : selected.getCourses()) {
             System.out.println("\n" + next.getCourseName() + "\t"
@@ -246,11 +253,12 @@ public class StudentService {
         System.out.println();
     }
 
-    // EFFECTS: prints GPA of selected time period to the screen
+    // EFFECTS: prints all award information to the screen
     private void printAwards(StudentTranscript myTranscript) {
         System.out.println("\nYour Awards are\n" + myTranscript.getAwardsInformation());
     }
 
+    // EFFECTS: prints the total number of prizes won to the screen
     private void printMoney(StudentTranscript myTranscript) {
         System.out.println("\nYou won " + myTranscript.getAllMoney() + " in total.");
     }

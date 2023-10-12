@@ -78,6 +78,21 @@ public class StudentTranscriptTest {
     }
 
     @Test
+    public void testAddDuplicate() {
+        testTranscript.addAward(a1);
+        testTranscript.addCourse(c1);
+        testTranscript.addAward(a1);
+        testTranscript.addCourse(c1);
+
+        assertEquals("Lucia", testTranscript.getStudentName());
+        assertEquals(001, testTranscript.getStudentID());
+        assertEquals(1,testTranscript.getAwards().size());
+        assertEquals(a1,testTranscript.getAwards().get(0));
+        assertEquals(1,testTranscript.getCourses().size());
+        assertEquals(c1,testTranscript.getCourses().get(0));
+    }
+
+    @Test
     public void testRemove() {
         testTranscript.addAward(a1);
         testTranscript.addAward(a2);
@@ -112,6 +127,18 @@ public class StudentTranscriptTest {
 
         assertEquals(96, testTranscript.getAverage());
 
+        Course c4 = new Course("TEST300", "2024S1", 3, 93, 90);
+        testTranscript.addCourse(c4);
+
+        assertEquals(95, testTranscript.getAverage());
+
+        testTranscript.removeCourse(c1);
+        testTranscript.removeCourse(c2);
+        testTranscript.removeCourse(c3);
+        testTranscript.removeCourse(c4);
+
+        assertEquals(0, testTranscript.getAverage());
+
     }
 
     @Test
@@ -126,6 +153,10 @@ public class StudentTranscriptTest {
         testTranscript.addCourse(c4);
         testTranscript.addCourse(c5);
 
+        List<Course> newCourses = testTranscript.getCourseBySemester("2023W2");
+        assertEquals(1, newCourses.size());
+        assertTrue(newCourses.contains(c5));
+
         StudentTranscript newTranscript = testTranscript.getTranscriptBySemester("2023W1");
 
         assertEquals("Lucia", newTranscript.getStudentName());
@@ -135,6 +166,7 @@ public class StudentTranscriptTest {
         assertTrue(newTranscript.getCourses().contains(c3));
         assertTrue(newTranscript.getCourses().contains(c4));
         assertEquals(0,newTranscript.getAwards().size());
+
 
     }
 
@@ -152,6 +184,16 @@ public class StudentTranscriptTest {
         assertTrue(testTranscript.getAwardsInformation().contains("Scholarship1"));
         assertTrue(testTranscript.getAwardsInformation().contains("Prize1"));
         assertTrue(testTranscript.getAwardsInformation().contains("Prize2"));
+
+        assertTrue(testTranscript.getAwardsInformation().contains("2022"));
+        assertTrue(testTranscript.getAwardsInformation().contains("2023"));
+        assertTrue(testTranscript.getAwardsInformation().contains("2023"));
+        assertTrue(testTranscript.getAwardsInformation().contains("2020"));
+
+        assertTrue(testTranscript.getAwardsInformation().contains("5000.0"));
+        assertTrue(testTranscript.getAwardsInformation().contains("8000.0"));
+        assertTrue(testTranscript.getAwardsInformation().contains("1000.0"));
+        assertTrue(testTranscript.getAwardsInformation().contains("5000.0"));
 
         assertEquals(19000, testTranscript.getAllMoney());
 
