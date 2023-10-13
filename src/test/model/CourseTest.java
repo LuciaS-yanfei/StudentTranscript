@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+//represents tests for course
 public class CourseTest {
 
     private Course testCourse;

@@ -1,5 +1,6 @@
 package model;
 
+//represents a course
 public class Course {
     private String courseName;
     private String semester;

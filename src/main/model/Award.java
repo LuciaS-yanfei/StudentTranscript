@@ -1,5 +1,6 @@
 package model;
 
+//represents an award
 public class Award {
     private String awardName;
     private int year;

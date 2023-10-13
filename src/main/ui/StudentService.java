@@ -6,9 +6,14 @@ import model.StudentTranscript;
 
 import java.util.Scanner;
 
+ //represents student service application
 public class StudentService {
     private StudentTranscript myTranscript;
     private Scanner input;
+    private Award a1 = new Award("Contest1st", 2022, 5000);
+    private Award a2 = new Award("Scholarship1", 2023, 8000);
+    private Course c1 = new Course("CPSC210","2023W1",4,100, 90);
+    private Course c2 = new Course("CPSC110","2022W1",4,90, 80);
 
     // EFFECTS: runs the student service application
     public StudentService() {
@@ -20,8 +25,14 @@ public class StudentService {
     private void runStudentService() {
         boolean keepGoing = true;
         String command = null;
+        input = new Scanner(System.in);
 
-        init();
+        System.out.println("Please enter your name (no spaces)");
+        String studentName = input.next();
+        System.out.println("Please enter your Student ID");
+        int studentId = input.nextInt();
+
+        init(studentName, studentId);
 
         while (keepGoing) {
             displayMenu();
@@ -40,18 +51,8 @@ public class StudentService {
 
     // MODIFIES: this
     // EFFECTS: initializes a student transcript and several awards and courses
-    private void init() {
-        myTranscript = new StudentTranscript("Lucia", 68849942);
-
-        Award a1 = new Award("Contest1st", 2022, 5000);
-        Award a2 = new Award("Scholarship1", 2023, 8000);
-        Course c1 = new Course("CPSC210","2023W1",4,100, 90);
-        Course c2 = new Course("CPSC110","2022W1",4,90, 80);
-
-        myTranscript.addAward(a1);
-        myTranscript.addAward(a2);
-        myTranscript.addCourse(c1);
-        myTranscript.addCourse(c2);
+    private void init(String studentName, int studentId) {
+        myTranscript = new StudentTranscript(studentName, studentId);
 
         input = new Scanner(System.in);
         input.useDelimiter("\n");

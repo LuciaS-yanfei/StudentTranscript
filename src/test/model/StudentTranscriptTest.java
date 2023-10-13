@@ -9,6 +9,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+//represents tests for student transcript
 public class StudentTranscriptTest {
 
     private StudentTranscript testTranscript;
@@ -110,6 +111,17 @@ public class StudentTranscriptTest {
 
         testTranscript.removeAward(a1);
         testTranscript.removeCourse(c1);
+
+        assertEquals(1,testTranscript.getAwards().size());
+        assertEquals(a2,testTranscript.getAwards().get(0));
+        assertEquals(1,testTranscript.getCourses().size());
+        assertEquals(c2,testTranscript.getCourses().get(0));
+
+        Course c3 = new Course("TEST300", "2024S1", 2, 98, 90);
+        Award a3 = new Award("Prize1",2023,1000);
+
+        testTranscript.removeAward(a3);
+        testTranscript.removeCourse(c3);
 
         assertEquals(1,testTranscript.getAwards().size());
         assertEquals(a2,testTranscript.getAwards().get(0));

@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+//represents student transcript
 public class StudentTranscript {
     private String studentName;
     private int studentId;
@@ -57,11 +58,12 @@ public class StudentTranscript {
         }
     }
 
-    //REQUIRES: course to remove is already in the transcript
     //MODIFIES: this
-    //EFFECTS: remove a course from student transcript
+    //EFFECTS: remove a course from student transcript if that course is in the list
     public void removeCourse(Course course) {
-        courses.remove(course);
+        if (courses.contains(course)) {
+            courses.remove(course);
+        }
     }
 
 
@@ -120,11 +122,12 @@ public class StudentTranscript {
         }
     }
 
-    //REQUIRES: award is already in the list
     //MODIFIES: this
-    //EFFECTS: remove award to student transcript
+    //EFFECTS: remove award to student transcript if that award is already in the list
     public void removeAward(Award award) {
-        awards.remove(award);
+        if (awards.contains(award)) {
+            awards.remove(award);
+        }
     }
 
     //REQUIRES: a list of awards in the transcript
