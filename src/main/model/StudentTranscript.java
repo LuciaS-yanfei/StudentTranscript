@@ -49,7 +49,6 @@ public class StudentTranscript {
         this.studentId = studentId;
     }
 
-    //REQUIRES:
     //MODIFIES: this
     //EFFECTS: add a course to student transcript if that course is not in the list
     public void addCourse(Course course) {
@@ -58,12 +57,12 @@ public class StudentTranscript {
         }
     }
 
+
+    //REQUIRES: course to remove is already in the list
     //MODIFIES: this
     //EFFECTS: remove a course from student transcript if that course is in the list
     public void removeCourse(Course course) {
-        if (courses.contains(course)) {
-            courses.remove(course);
-        }
+        courses.remove(course);
     }
 
 
@@ -73,6 +72,7 @@ public class StudentTranscript {
         return calculateAverage(courses);
     }
 
+    //MODIFIES: this
     //EFFECTS: calculates average over all courses in the list;
     //         0 if List of Courses is empty
     public int calculateAverage(List<Course> courses) {
@@ -92,8 +92,9 @@ public class StudentTranscript {
 
     }
 
-    //REQUIRES: a list of courses in the transcript
-    //EFFECTS: give all the courses in the selected semester
+    //REQUIRES: a list of courses in the transcript and a string input
+    //MODIFIES: this
+    //EFFECTS: give all the courses in the selected semester and returns it
     public List<Course> getCourseBySemester(String semester) {
         List<Course> courseBySemester = new ArrayList<>();
 
@@ -105,8 +106,9 @@ public class StudentTranscript {
         return courseBySemester;
     }
 
-    //REQUIRES: a student transcript
-    //EFFECTS: give student's transcript of the selected semester
+    //REQUIRES: a student transcript and a string input
+    //MODIFIES: this
+    //EFFECTS: give student's transcript of the selected semester and returns it
     public StudentTranscript getTranscriptBySemester(String semester) {
         StudentTranscript transcriptBySemester = new StudentTranscript(studentName,studentId);
         transcriptBySemester.courses = getCourseBySemester(semester);
@@ -122,16 +124,16 @@ public class StudentTranscript {
         }
     }
 
+    //REQUIRES: award to remove is already in the list
     //MODIFIES: this
     //EFFECTS: remove award to student transcript if that award is already in the list
     public void removeAward(Award award) {
-        if (awards.contains(award)) {
-            awards.remove(award);
-        }
+        awards.remove(award);
     }
 
     //REQUIRES: a list of awards in the transcript
-    //EFFECTS: returns a List of String of all the award's information in the list
+    //MODIFIES: this
+    //EFFECTS: returns a List of Strings of all the award's information in the list
     public List<String> getAwardsInformation() {
         List<String> awardsInformation = new ArrayList<>();
         for (Award next: awards) {

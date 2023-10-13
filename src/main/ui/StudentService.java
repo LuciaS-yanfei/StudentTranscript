@@ -54,6 +54,11 @@ public class StudentService {
     private void init(String studentName, int studentId) {
         myTranscript = new StudentTranscript(studentName, studentId);
 
+        myTranscript.addAward(a1);
+        myTranscript.addAward(a2);
+        myTranscript.addCourse(c1);
+        myTranscript.addCourse(c2);
+
         input = new Scanner(System.in);
         input.useDelimiter("\n");
     }
@@ -117,7 +122,6 @@ public class StudentService {
         System.out.println("\nCourse successfully added! ");
     }
 
-    // REQUIRES: course to remove is already in the list
     // MODIFIES: this
     // EFFECTS: Remove a course from my transcript
     private void doRemoveCourse() {
@@ -129,10 +133,9 @@ public class StudentService {
                 myTranscript.removeCourse(next);
                 System.out.println("\nCourse successfully removed! ");
                 break;
-            } else {
-                System.out.println("\nCourse is not in the Transcript! ");
             }
         }
+        System.out.println("\nWork done! ");
     }
 
     // MODIFIES: this
@@ -151,7 +154,6 @@ public class StudentService {
         System.out.println("\nAward successfully added! ");
     }
 
-    // REQUIRES: award to remove is already in the transcript
     // MODIFIES: this
     // EFFECTS: Remove an award from my transcript
     private void doRemoveAward() {
@@ -163,10 +165,9 @@ public class StudentService {
                 myTranscript.removeAward(next);
                 System.out.println("\nAward successfully removed! ");
                 break;
-            } else {
-                System.out.println("\nAward is not in the Transcript! ");
             }
         }
+        System.out.println("\nWork done! ");
     }
 
     // MODIFIES: this

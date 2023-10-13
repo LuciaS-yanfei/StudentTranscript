@@ -3,7 +3,6 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -20,9 +19,8 @@ public class StudentTranscriptTest {
 
     @BeforeEach
     public void setup() {
-        testTranscript = new StudentTranscript("Lucia", 001);
-        List<Award>  awards = new ArrayList<>();
-        List<Course> courses = new ArrayList<>();
+        testTranscript = new StudentTranscript("Lucia", 1);
+
         a1 = new Award("Contest1st", 2022, 5000);
         a2 = new Award("Scholarship1", 2023, 8000);
         c1 = new Course("CPSC210","2023W1",4,100, 90);
@@ -33,7 +31,7 @@ public class StudentTranscriptTest {
     @Test
     public void testConstructor() {
         assertEquals("Lucia", testTranscript.getStudentName());
-        assertEquals(001, testTranscript.getStudentID());
+        assertEquals(1, testTranscript.getStudentID());
         assertEquals(0,testTranscript.getCourses().size());
         assertEquals(0,testTranscript.getAwards().size());
 
@@ -42,10 +40,10 @@ public class StudentTranscriptTest {
     @Test
     public void testSetters() {
         testTranscript.setStudentName("Yanfei");
-        testTranscript.setStudentID(002);
+        testTranscript.setStudentID(2);
 
         assertEquals("Yanfei", testTranscript.getStudentName());
-        assertEquals(002, testTranscript.getStudentID());
+        assertEquals(2, testTranscript.getStudentID());
         assertEquals(0,testTranscript.getCourses().size());
         assertEquals(0,testTranscript.getAwards().size());
 
@@ -57,7 +55,7 @@ public class StudentTranscriptTest {
         testTranscript.addCourse(c1);
 
         assertEquals("Lucia", testTranscript.getStudentName());
-        assertEquals(001, testTranscript.getStudentID());
+        assertEquals(1, testTranscript.getStudentID());
         assertEquals(1,testTranscript.getAwards().size());
         assertEquals(a1,testTranscript.getAwards().get(0));
         assertEquals(1,testTranscript.getCourses().size());
@@ -86,7 +84,7 @@ public class StudentTranscriptTest {
         testTranscript.addCourse(c1);
 
         assertEquals("Lucia", testTranscript.getStudentName());
-        assertEquals(001, testTranscript.getStudentID());
+        assertEquals(1, testTranscript.getStudentID());
         assertEquals(1,testTranscript.getAwards().size());
         assertEquals(a1,testTranscript.getAwards().get(0));
         assertEquals(1,testTranscript.getCourses().size());
@@ -101,7 +99,7 @@ public class StudentTranscriptTest {
         testTranscript.addCourse(c2);
 
         assertEquals("Lucia", testTranscript.getStudentName());
-        assertEquals(001, testTranscript.getStudentID());
+        assertEquals(1, testTranscript.getStudentID());
         assertEquals(2,testTranscript.getAwards().size());
         assertEquals(a1,testTranscript.getAwards().get(0));
         assertEquals(a2,testTranscript.getAwards().get(1));
@@ -172,7 +170,7 @@ public class StudentTranscriptTest {
         StudentTranscript newTranscript = testTranscript.getTranscriptBySemester("2023W1");
 
         assertEquals("Lucia", newTranscript.getStudentName());
-        assertEquals(001, newTranscript.getStudentID());
+        assertEquals(1, newTranscript.getStudentID());
         assertEquals(3,newTranscript.getCourses().size());
         assertTrue(newTranscript.getCourses().contains(c1));
         assertTrue(newTranscript.getCourses().contains(c3));
