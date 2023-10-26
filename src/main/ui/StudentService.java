@@ -3,20 +3,30 @@ package ui;
 import model.Award;
 import model.Course;
 import model.StudentTranscript;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
  //represents student service application
 public class StudentService {
+    private static final String JSON_STORE = "./data/studentTranscript.json";
     private StudentTranscript myTranscript;
     private Scanner input;
     private Award a1 = new Award("Contest1st", 2022, 5000);
     private Award a2 = new Award("Scholarship1", 2023, 8000);
     private Course c1 = new Course("CPSC210","2023W1",4,100, 90);
     private Course c2 = new Course("CPSC110","2022W1",4,90, 80);
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // EFFECTS: runs the student service application
-    public StudentService() {
+    public StudentService() throws FileNotFoundException {
+        input = new Scanner(System.in);
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         runStudentService();
     }
 
@@ -28,7 +38,7 @@ public class StudentService {
         input = new Scanner(System.in);
 
         System.out.println("Please enter your name (no spaces)");
-        String studentName = input.next();
+        String studentName = input.nextLine();
         System.out.println("Please enter your Student ID");
         int studentId = input.nextInt();
 
@@ -74,6 +84,8 @@ public class StudentService {
         System.out.println("\tinfo -> Course Information");
         System.out.println("\tt -> Display Transcript");
         System.out.println("\ta -> Display Award List");
+        System.out.println("\ts -> save work room to file");
+        System.out.println("\tl -> load work room from file");
         System.out.println("\tq -> quit");
 
     }
@@ -97,6 +109,10 @@ public class StudentService {
             doAddAward();
         } else if (command.equals("removea")) {
             doRemoveAward();
+        } else if (command.equals("s")) {
+            saveStudentTranscript();
+        } else if (command.equals("l")) {
+            loadStudentTranscript();
         } else {
             System.out.println("Selection not valid...");
         }
@@ -107,9 +123,9 @@ public class StudentService {
     private void doAddCourse() {
         input = new Scanner(System.in);
         System.out.print("Enter the course name you want to add (eg. CPSC210) ");
-        String courseName = input.next();
+        String courseName = input.nextLine();
         System.out.print("Enter the semester you took this course (eg. 2022S1) ");
-        String courseSemester = input.next();
+        String courseSemester = input.nextLine();
         System.out.print("Enter the credits this course worth ");
         int courseCredits = input.nextInt();
         System.out.print("Enter your final grade for this course (out of 100) ");
@@ -264,6 +280,33 @@ public class StudentService {
     private void printMoney(StudentTranscript myTranscript) {
         System.out.println("\nYou won " + myTranscript.getAllMoney() + " in total.");
     }
+
+    // EFFECTS: saves my transcript to file
+    private void saveStudentTranscript() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(myTranscript);
+            jsonWriter.close();
+            System.out.println("Saved " + myTranscript.getStudentName() + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads my transcript from file
+    private void loadStudentTranscript() {
+        try {
+            myTranscript = jsonReader.read();
+            System.out.println("Loaded " + myTranscript.getStudentName() + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
+
+
+
+
 
 
 

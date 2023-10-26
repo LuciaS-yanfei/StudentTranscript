@@ -1,7 +1,10 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 //represents an award
-public class Award {
+public class Award implements Writable {
     private String awardName;
     private int year;
     private double awardMoney;
@@ -37,6 +40,15 @@ public class Award {
 
     public void setPrize(double awardMoney) {
         this.awardMoney = awardMoney;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("awardName", awardName);
+        json.put("year", year);
+        json.put("awardMoney", awardMoney);
+        return json;
     }
 
 }

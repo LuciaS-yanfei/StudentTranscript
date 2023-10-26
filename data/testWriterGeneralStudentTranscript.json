@@ -1,0 +1,32 @@
+{
+    "courses": [
+        {
+            "courseAverage": 70,
+            "credits": 3,
+            "grade": 90,
+            "name": "MATH100",
+            "semester": "2023W1"
+        },
+        {
+            "courseAverage": 75,
+            "credits": 3,
+            "grade": 95,
+            "name": "MATH110",
+            "semester": "2023W2"
+        }
+    ],
+    "awards": [
+        {
+            "awardMoney": 5000,
+            "year": 2022,
+            "awardName": "Contest1st"
+        },
+        {
+            "awardMoney": 8000,
+            "year": 2023,
+            "awardName": "Scholarship1"
+        }
+    ],
+    "name": "Lucia Song",
+    "ID": 68849942
+}

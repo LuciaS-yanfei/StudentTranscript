@@ -1,15 +1,20 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 //represents student transcript
-public class StudentTranscript {
+public class StudentTranscript implements Writable {
     private String studentName;
     private int studentId;
     private List<Course> courses;
     private List<Award> awards;
 
+    // EFFECTS: creates a student transcript with studentName and studentId
     public StudentTranscript(String studentName, int studentId) {
         this.studentName = studentName;
         this.studentId = studentId;
@@ -160,6 +165,38 @@ public class StudentTranscript {
             money += next.getAwardMoney();
         }
         return money;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", studentName);
+        json.put("ID", studentId);
+        json.put("courses", coursesToJson());
+        json.put("awards", awardsToJson());
+        return json;
+    }
+
+    // EFFECTS: returns things in this workroom as a JSON array
+    private JSONArray coursesToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Course c : courses) {
+            jsonArray.put(c.toJson());
+        }
+
+        return jsonArray;
+    }
+
+    // EFFECTS: returns things in this workroom as a JSON array
+    private JSONArray awardsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Award a : awards) {
+            jsonArray.put(a.toJson());
+        }
+
+        return jsonArray;
     }
 
 

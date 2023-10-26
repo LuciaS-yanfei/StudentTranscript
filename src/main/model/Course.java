@@ -1,7 +1,10 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 //represents a course
-public class Course {
+public class Course implements Writable {
     private String courseName;
     private String semester;
     private int credits;
@@ -58,6 +61,17 @@ public class Course {
 
     public void setCourseAverage(int courseAverage) {
         this.courseAverage = courseAverage;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", courseName);
+        json.put("semester", semester);
+        json.put("credits", credits);
+        json.put("grade", grade);
+        json.put("courseAverage", courseAverage);
+        return json;
     }
 
 }
