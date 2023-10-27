@@ -3,10 +3,10 @@ package persistence;
 import model.StudentTranscript;
 import org.json.JSONObject;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
+// Represents a writer that writes JSON representation of student transcript to file
 public class JsonWriter {
     private static final int TAB = 4;
     private PrintWriter writer;

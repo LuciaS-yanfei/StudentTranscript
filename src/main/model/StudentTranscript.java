@@ -167,6 +167,7 @@ public class StudentTranscript implements Writable {
         return money;
     }
 
+    // EFFECTS: returns this as JSON object
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

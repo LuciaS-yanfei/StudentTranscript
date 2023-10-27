@@ -12,7 +12,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
 
-
+// Represents a reader that reads student transcript from JSON data stored in file
 public class JsonReader {
     private String source;
 
@@ -40,7 +40,7 @@ public class JsonReader {
         return contentBuilder.toString();
     }
 
-    // EFFECTS: parses workroom from JSON object and returns it
+    // EFFECTS: parses student transcript from JSON object and returns it
     private StudentTranscript parseStudentTranscript(JSONObject jsonObject) {
         String name = jsonObject.getString("name");
         int id = jsonObject.getInt("ID");

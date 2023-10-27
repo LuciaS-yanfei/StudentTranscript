@@ -11,6 +11,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+//represents tests for JsonWriter
 public class JsonWriterTest extends JsonTest{
 
     @Test

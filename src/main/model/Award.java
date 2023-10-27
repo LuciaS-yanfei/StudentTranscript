@@ -42,6 +42,7 @@ public class Award implements Writable {
         this.awardMoney = awardMoney;
     }
 
+    // EFFECTS: returns this as JSON object
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

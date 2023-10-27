@@ -37,7 +37,7 @@ public class StudentService {
         String command = null;
         input = new Scanner(System.in);
 
-        System.out.println("Please enter your name (no spaces)");
+        System.out.println("Please enter your name");
         String studentName = input.nextLine();
         System.out.println("Please enter your Student ID");
         int studentId = input.nextInt();
@@ -143,7 +143,7 @@ public class StudentService {
     private void doRemoveCourse() {
         input = new Scanner(System.in);
         System.out.print("Enter the course name you want to remove (eg. CPSC210) ");
-        String courseName = input.next();
+        String courseName = input.nextLine();
         for (Course next: myTranscript.getCourses()) {
             if (courseName.equals(next.getCourseName())) {
                 myTranscript.removeCourse(next);
@@ -158,8 +158,8 @@ public class StudentService {
     // EFFECTS: Add an award to my transcript
     private void doAddAward() {
         input = new Scanner(System.in);
-        System.out.print("Enter the Award name you want to add (no spaces) ");
-        String awardName = input.next();
+        System.out.print("Enter the Award name you want to add ");
+        String awardName = input.nextLine();
         System.out.print("Enter the year you won this award ");
         int yearWon = input.nextInt();
         System.out.print("Enter the prize for this award ");
@@ -175,7 +175,7 @@ public class StudentService {
     private void doRemoveAward() {
         input = new Scanner(System.in);
         System.out.print("Enter the Award name you want to remove ");
-        String awardName = input.next();
+        String awardName = input.nextLine();
         for (Award next: myTranscript.getAwards()) {
             if (awardName.equals(next.getAwardName())) {
                 myTranscript.removeAward(next);
@@ -234,7 +234,7 @@ public class StudentService {
         } else {
             input = new Scanner(System.in);
             System.out.println("Type in the semester(eg. 2002W1):");
-            selectSemester = input.next();
+            selectSemester = input.nextLine();
             StudentTranscript semesterTranscript = myTranscript.getTranscriptBySemester(selectSemester);
             return semesterTranscript;
         }
