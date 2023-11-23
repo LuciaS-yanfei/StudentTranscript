@@ -142,7 +142,7 @@ public class StudentServiceUI extends JFrame {
         add(awards);
     }
 
-    @SuppressWarnings("checkstyle:MethodLength")
+    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     private void addMenu() {
         this.setJMenuBar(menuBar);
         menu.setMnemonic(KeyEvent.VK_A);
@@ -199,7 +199,7 @@ public class StudentServiceUI extends JFrame {
         menu.add(menuItem);
     }
 
-    @SuppressWarnings("checkstyle:MethodLength")
+    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     private void addCourseBottom() {
         addCourse.setActionCommand("addCourse");
         removeCourse.setActionCommand("removeCourse");
@@ -458,7 +458,7 @@ public class StudentServiceUI extends JFrame {
         addTranscriptAction();
     }
 
-    @SuppressWarnings("checkstyle:MethodLength")
+    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     public void addTranscriptAction() {
         showOverallTranscript.addActionListener(new ActionListener() {
             @Override
