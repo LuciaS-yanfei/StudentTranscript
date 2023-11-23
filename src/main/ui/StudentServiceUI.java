@@ -142,6 +142,7 @@ public class StudentServiceUI extends JFrame {
         add(awards);
     }
 
+    @SuppressWarnings("checkstyle:MethodLength")
     private void addMenu() {
         this.setJMenuBar(menuBar);
         menu.setMnemonic(KeyEvent.VK_A);
@@ -198,6 +199,7 @@ public class StudentServiceUI extends JFrame {
         menu.add(menuItem);
     }
 
+    @SuppressWarnings("checkstyle:MethodLength")
     private void addCourseBottom() {
         addCourse.setActionCommand("addCourse");
         removeCourse.setActionCommand("removeCourse");
@@ -399,9 +401,11 @@ public class StudentServiceUI extends JFrame {
                     }
                 }
                 if (awardRemoved) {
-                    JOptionPane.showMessageDialog(null, "Award removed successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Award removed successfully",
+                            "Success", JOptionPane.INFORMATION_MESSAGE);
                 } else {
-                    JOptionPane.showMessageDialog(null, "Award not found", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Award not found", "Error",
+                            JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
@@ -454,6 +458,7 @@ public class StudentServiceUI extends JFrame {
         addTranscriptAction();
     }
 
+    @SuppressWarnings("checkstyle:MethodLength")
     public void addTranscriptAction() {
         showOverallTranscript.addActionListener(new ActionListener() {
             @Override
