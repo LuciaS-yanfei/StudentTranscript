@@ -480,7 +480,6 @@ public class StudentServiceUI extends JFrame {
                 for (Award next : st.getAwards()) {
                     listModel.addElement(next.toString());
                 }
-
                 JList<String> transcriptList = new JList<>(listModel);
                 JScrollPane scrollPane = new JScrollPane(transcriptList);
                 scrollPane.setPreferredSize(new Dimension(400,600));
