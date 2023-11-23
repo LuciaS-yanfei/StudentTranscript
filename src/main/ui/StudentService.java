@@ -120,7 +120,7 @@ public class StudentService {
 
     // MODIFIES: this
     // EFFECTS: Add a course to my transcript
-    private void doAddCourse() {
+    protected void doAddCourse() {
         input = new Scanner(System.in);
         System.out.print("Enter the course name you want to add (eg. CPSC210) ");
         String courseName = input.nextLine();
@@ -282,7 +282,7 @@ public class StudentService {
     }
 
     // EFFECTS: saves my transcript to file
-    private void saveStudentTranscript() {
+    protected void saveStudentTranscript() {
         try {
             jsonWriter.open();
             jsonWriter.write(myTranscript);
@@ -295,7 +295,7 @@ public class StudentService {
 
     // MODIFIES: this
     // EFFECTS: loads my transcript from file
-    private void loadStudentTranscript() {
+    protected void loadStudentTranscript() {
         try {
             myTranscript = jsonReader.read();
             System.out.println("Loaded " + myTranscript.getStudentName() + " from " + JSON_STORE);

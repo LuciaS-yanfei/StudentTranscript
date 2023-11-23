@@ -63,6 +63,12 @@ public class Course implements Writable {
         this.courseAverage = courseAverage;
     }
 
+    @Override
+    public String toString() {
+        return courseName + " in " + semester + " is worth " + credits + " credits "
+                + " student's grade: " + grade + " course average: " + courseAverage + "\n";
+    }
+
     // EFFECTS: returns this as JSON object
     @Override
     public JSONObject toJson() {

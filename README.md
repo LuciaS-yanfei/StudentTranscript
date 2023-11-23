@@ -42,3 +42,18 @@ date, award name, prize won.
 - As a user, I want to be able to know how much money I won in total.
 - As a user, I want to be able to save my transcript to file (if I so choose)
 - As a user, when I start the application, I want to be given the option to load my transcript from file.
+
+## Instructions for Grader
+
+- You will be required to input your name and student id at the beginning to customize your transcript.
+- You can generate the first required action related to the user story "adding multiple courses to a transcript" 
+by input all the needed course information in the provided text fields and then click addCourse.
+- You can generate the second required action related to the user story "adding multiple courses to a transcript"
+by input the name of course you want to remove in the provided text fields and then click removeCourse.
+- You can view the student transcript by clicking the "showOverallTranscript" button and you can also select 
+"shouTranscriptBySemester" and type in the semester you want to see the semester transcript.
+- The same operation for three sections (Course, Award, Transcript)
+- You can calculate GPA using the gpa calculator and it can also calculate each semester's gpa.
+- You can locate my visual component by checking the menuBar.
+- You can save the state of my application by clicking "file" in the menu bar and select "save" in the drop-down menu 
+- You can reload the state of my application by clicking "file" in the menu bar and select "load" in the drop-down menu

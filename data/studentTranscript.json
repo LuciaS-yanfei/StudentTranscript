@@ -1,16 +1,16 @@
 {
     "courses": [{
-        "courseAverage": 80,
-        "credits": 4,
-        "grade": 90,
-        "name": "CPSC110",
-        "semester": "2022W1"
+        "courseAverage": 3,
+        "credits": 1,
+        "grade": 2,
+        "name": "MATH101",
+        "semester": "2232"
     }],
     "awards": [{
-        "awardMoney": 8000,
-        "year": 2023,
-        "awardName": "Scholarship1"
+        "awardMoney": 2121,
+        "year": 1212,
+        "awardName": "wowo"
     }],
-    "name": "Lucia Song",
-    "ID": 68849942
+    "name": "Lucia",
+    "ID": 88
 }

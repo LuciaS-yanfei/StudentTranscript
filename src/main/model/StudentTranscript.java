@@ -94,7 +94,6 @@ public class StudentTranscript implements Writable {
             return (int) (result + 0.5);
         }
         return 0;
-
     }
 
     //REQUIRES: a list of courses in the transcript and a string input

@@ -52,6 +52,11 @@ public class Award implements Writable {
         return json;
     }
 
+    @Override
+    public String toString() {
+        return awardName + " win in" + year + " prize is: " + awardMoney + "\n";
+    }
+
 }
 
 
