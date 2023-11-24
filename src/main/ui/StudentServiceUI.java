@@ -188,14 +188,28 @@ public class StudentServiceUI extends JFrame {
         });
         menu.add(menuItem);
 
-        menu = new JMenu("Another Menu");
+        menu = new JMenu("show");
         menu.setMnemonic(KeyEvent.VK_N);
         menuBar.add(menu);
 
         menuItem = new JMenuItem("School Picture");
         menuItem.setMnemonic(KeyEvent.VK_P);
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, ActionEvent.ALT_MASK));
-        menuItem.setActionCommand("pic");
+        menuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String desktopPath = "/Users/songyanfei/Desktop";
+                JFrame pictureFrame = new JFrame("School Picture");
+                pictureFrame.setSize(400, 400);
+
+                JLabel pictureLabel = new JLabel();
+                ImageIcon imageIcon = new ImageIcon(desktopPath + "/UBC.jpeg");
+                pictureLabel.setIcon(imageIcon);
+                pictureFrame.getContentPane().add(pictureLabel, BorderLayout.CENTER);
+                pictureFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                pictureFrame.setVisible(true);
+            }
+        });
         menu.add(menuItem);
     }
 
@@ -612,7 +626,9 @@ public class StudentServiceUI extends JFrame {
         try {
             new StudentServiceUI();
         } catch (FileNotFoundException e) {
-            System.out.println("do nothing");
+            JOptionPane.showMessageDialog(
+                    null, "Unable to run application: file not found", "Error",
+                    JOptionPane.ERROR_MESSAGE);
         }
     }
 
