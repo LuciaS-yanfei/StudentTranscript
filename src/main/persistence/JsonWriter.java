@@ -4,6 +4,8 @@ import model.StudentTranscript;
 import org.json.JSONObject;
 
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 
 // Represents a writer that writes JSON representation of student transcript to file
@@ -20,7 +22,7 @@ public class JsonWriter {
     // MODIFIES: this
     // EFFECTS: opens writer; throws FileNotFoundException if destination file cannot
     // be opened for writing
-    public void open() throws FileNotFoundException {
+    public void open() throws IOException {
         writer = new PrintWriter(destination);
     }
 

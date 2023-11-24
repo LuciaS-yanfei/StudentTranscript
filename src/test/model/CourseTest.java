@@ -38,7 +38,19 @@ public class CourseTest {
         assertEquals(3, testCourse.getCredits());
         assertEquals(90, testCourse.getGrade());
         assertEquals(90, testCourse.getCourseAverage());
+    }
 
+    @Test
+    public void testToString() {
+        testCourse.setCourseName("TEST200");
+        testCourse.setSemester("2023W2");
+        testCourse.setCredits(3);
+        testCourse.setGrade(90);
+        testCourse.setCourseAverage(90);
+        assertEquals("TEST200 in 2023W2 is worth 3 credits  student's grade: 90 course average: 90\n",
+                testCourse.toString());
+//        courseName + " in " + semester + " is worth " + credits + " credits "
+//                + " student's grade: " + grade + " course average: " + courseAverage + "\n"
     }
 
 

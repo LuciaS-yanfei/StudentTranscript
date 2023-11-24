@@ -288,7 +288,7 @@ public class StudentService {
             jsonWriter.write(myTranscript);
             jsonWriter.close();
             System.out.println("Saved " + myTranscript.getStudentName() + " to " + JSON_STORE);
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             System.out.println("Unable to write to file: " + JSON_STORE);
         }
     }

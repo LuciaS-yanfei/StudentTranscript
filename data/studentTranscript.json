@@ -1,16 +1,6 @@
 {
-    "courses": [{
-        "courseAverage": 3,
-        "credits": 1,
-        "grade": 2,
-        "name": "MATH101",
-        "semester": "2232"
-    }],
-    "awards": [{
-        "awardMoney": 2121,
-        "year": 1212,
-        "awardName": "wowo"
-    }],
-    "name": "Lucia",
-    "ID": 88
+    "courses": [],
+    "awards": [],
+    "name": "211",
+    "ID": 21
 }

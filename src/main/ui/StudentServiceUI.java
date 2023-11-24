@@ -17,6 +17,7 @@ import persistence.JsonWriter;
 import model.Course;
 import model.StudentTranscript;
 
+//represents GUI student service application
 public class StudentServiceUI extends JFrame {
 
     public static final int WIDTH = 800;
@@ -73,10 +74,11 @@ public class StudentServiceUI extends JFrame {
     private JTextField yearWinTextField = new JTextField("", 10);
     private JTextField awardPrizeTextField = new JTextField("", 10);
 
+    // EFFECTS: runs the student service application
     public StudentServiceUI() throws FileNotFoundException {
         super("Student Service Application");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(WIDTH,HEIGHT);
+        setSize(WIDTH, HEIGHT);
 
         String studentName = JOptionPane.showInputDialog("Enter your name");
 //        String studentId = JOptionPane.showInputDialog("Enter your student ID");
@@ -89,14 +91,16 @@ public class StudentServiceUI extends JFrame {
 
         addMenu();
         addPanel();
+        addCourseInfo();
         addCourseBottom();
         addAwardBottom();
         addTranscriptBottom();
 
-
         setVisible(true);
     }
 
+    // MODIFIES: this
+    // EFFECTS: Prompts the user to enter a valid student ID, and returns the valid student ID.
     private static String getStudentId() {
         String input;
         boolean validInput = false;
@@ -125,6 +129,9 @@ public class StudentServiceUI extends JFrame {
         return input;
     }
 
+    // MODIFIES: This
+    // EFFECTS: Sets background colors for the panels, sets the layout to null,
+    // adds the panels to the frame with specific bounds.
     private void addPanel() {
 
         courses.setBackground(new Color(229, 229, 129));
@@ -142,7 +149,9 @@ public class StudentServiceUI extends JFrame {
         add(awards);
     }
 
-    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
+    // MODIFIES: This
+    // EFFECTS: Sets up and adds a menu to the frame's menu bar with "Save," "Load," and "Show" options.
+    // Configures mnemonics, accelerators, and action listeners for each menu item.
     private void addMenu() {
         this.setJMenuBar(menuBar);
         menu.setMnemonic(KeyEvent.VK_A);
@@ -152,40 +161,14 @@ public class StudentServiceUI extends JFrame {
         menuItem.setMnemonic(KeyEvent.VK_S);
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.ALT_MASK));
         menuItem.setActionCommand("save");
-        menuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent a) {
-                if ("save".equals(a.getActionCommand())) {
-                    try {
-                        jsonWriter.open();
-                        jsonWriter.write(st);
-                        jsonWriter.close();
-                        System.out.println("Saved " + st.getStudentName() + " to " + JSON_STORE);
-                    } catch (FileNotFoundException e) {
-                        System.out.println("Unable to write to file: " + JSON_STORE);
-                    }
-                }
-            }
-        });
+        menuItem.addActionListener(new DoSave());
         menu.add(menuItem);
 
         menuItem = new JMenuItem("Load");
         menuItem.setMnemonic(KeyEvent.VK_L);
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, ActionEvent.ALT_MASK));
         menuItem.setActionCommand("load");
-        menuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent a) {
-                if ("load".equals(a.getActionCommand())) {
-                    try {
-                        st = jsonReader.read();
-                        System.out.println("Loaded " + st.getStudentName() + " from " + JSON_STORE);
-                    } catch (IOException e) {
-                        System.out.println("Unable to read from file: " + JSON_STORE);
-                    }
-                }
-            }
-        });
+        menuItem.addActionListener(new DoLoad());
         menu.add(menuItem);
 
         menu = new JMenu("show");
@@ -195,26 +178,71 @@ public class StudentServiceUI extends JFrame {
         menuItem = new JMenuItem("School Picture");
         menuItem.setMnemonic(KeyEvent.VK_P);
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, ActionEvent.ALT_MASK));
-        menuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String desktopPath = "/Users/songyanfei/Desktop";
-                JFrame pictureFrame = new JFrame("School Picture");
-                pictureFrame.setSize(400, 400);
-
-                JLabel pictureLabel = new JLabel();
-                ImageIcon imageIcon = new ImageIcon(desktopPath + "/UBC.jpeg");
-                pictureLabel.setIcon(imageIcon);
-                pictureFrame.getContentPane().add(pictureLabel, BorderLayout.CENTER);
-                pictureFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                pictureFrame.setVisible(true);
-            }
-        });
+        menuItem.addActionListener(new DisplayPicture());
         menu.add(menuItem);
     }
 
-    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
-    private void addCourseBottom() {
+    // MODIFIES: st, JSON_STORE
+    // EFFECTS: Save the current student transcript (st) to a JSON file (JSON_STORE)
+    public class DoSave implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent a) {
+            if ("save".equals(a.getActionCommand())) {
+                try {
+//                        StudentTranscript oldSt = jsonReader.read();
+                    System.out.println("Loaded " + st.getStudentName() + " from " + JSON_STORE);
+//
+//                        for (Course c: oldSt.getCourses()) {
+//                            st.addCourse(c);
+//                        }
+                    jsonWriter.open();
+                    jsonWriter.write(st);
+                    jsonWriter.close();
+                    System.out.println("Saved " + st.getStudentName() + " to " + JSON_STORE);
+                } catch (IOException e) {
+                    System.out.println("Unable to write to file: " + JSON_STORE);
+                }
+            }
+        }
+    }
+
+    // EFFECTS: Load the current student transcript (st) from a JSON file (JSON_STORE)
+    public class DoLoad implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent a) {
+            if ("load".equals(a.getActionCommand())) {
+                try {
+                    st = jsonReader.read();
+                    System.out.println("Loaded " + st.getStudentName() + " from " + JSON_STORE);
+                } catch (IOException e) {
+                    System.out.println("Unable to read from file: " + JSON_STORE);
+                }
+            }
+        }
+    }
+
+    // EFFECTS: Displays a school picture using a JFrame and JLabel.
+    public class DisplayPicture implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String desktopPath = "/Users/songyanfei/Desktop";
+            JFrame pictureFrame = new JFrame("School Picture");
+            pictureFrame.setSize(1500, 1200);
+
+            JLabel pictureLabel = new JLabel();
+            ImageIcon imageIcon = new ImageIcon(desktopPath + "/UBC.jpeg");
+            pictureLabel.setIcon(imageIcon);
+            pictureFrame.getContentPane().add(pictureLabel, BorderLayout.CENTER);
+            pictureFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            pictureFrame.setVisible(true);
+        }
+    }
+
+    // MODIFIES: addCourse, removeCourse, showOverallCourses, findCourseBySemester, course, courses
+    // EFFECTS: Configures action commands for buttons,
+    // sets up course-related labels and text fields in the courses panel
+    private void addCourseInfo() {
         addCourse.setActionCommand("addCourse");
         removeCourse.setActionCommand("removeCourse");
         showOverallCourses.setActionCommand("showOverallCourses");
@@ -235,7 +263,11 @@ public class StudentServiceUI extends JFrame {
         courses.add(studentGradeTextField);
         courses.add(courseAverageLabel);
         courses.add(courseAverageTextField);
+    }
 
+    // MODIFIES: courses
+    // EFFECTS: Adds course-related buttons to the courses panel and assigns corresponding actions
+    private void addCourseBottom() {
         courses.add(addCourse);
         courses.add(removeCourse);
         courses.add(showOverallCourses);
@@ -247,6 +279,8 @@ public class StudentServiceUI extends JFrame {
         findCourseBySemesterAction();
     }
 
+    // MODIFIES: st
+    // EFFECTS: Assigns an action to the addCourse button to add a course to the student transcript (st)
     private void addCourseAction() {
         addCourse.addActionListener(new ActionListener() {
             @Override
@@ -274,6 +308,8 @@ public class StudentServiceUI extends JFrame {
         });
     }
 
+    // MODIFIES: st
+    // EFFECTS: Assigns an action to the removeCourse button to remove a course from the student transcript (st)
     private void removeCourseAction() {
         removeCourse.addActionListener(new ActionListener() {
             @Override
@@ -301,12 +337,13 @@ public class StudentServiceUI extends JFrame {
         });
     }
 
+    // EFFECTS: Assigns an action to the showOverallCourses button to display course information in a new JFrame
     private void showOverallCoursesAction() {
         showOverallCourses.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame frame = new JFrame("Course Information");
-                frame.setSize(400,400);
+                frame.setSize(400, 400);
                 frame.setLocationRelativeTo(null);
                 frame.setResizable(false);
                 DefaultListModel<String> listModel = new DefaultListModel<>();
@@ -316,7 +353,7 @@ public class StudentServiceUI extends JFrame {
                 }
                 JList<String> courseList = new JList<>(listModel);
                 JScrollPane scrollPane = new JScrollPane(courseList);
-                scrollPane.setPreferredSize(new Dimension(400,600));
+                scrollPane.setPreferredSize(new Dimension(400, 600));
                 frame.add(scrollPane);
                 frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 frame.setVisible(true);
@@ -324,12 +361,14 @@ public class StudentServiceUI extends JFrame {
         });
     }
 
+    // EFFECTS: Assigns an action to the findCourseBySemester button
+    // to display course information for a specific semester in a new JFrame
     private void findCourseBySemesterAction() {
         findCourseBySemester.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame frame = new JFrame("Course Information");
-                frame.setSize(400,400);
+                frame.setSize(400, 400);
                 frame.setLocationRelativeTo(null);
                 frame.setResizable(false);
                 DefaultListModel<String> listModel = new DefaultListModel<>();
@@ -342,7 +381,7 @@ public class StudentServiceUI extends JFrame {
                 }
                 JList<String> courseList = new JList<>(listModel);
                 JScrollPane scrollPane = new JScrollPane(courseList);
-                scrollPane.setPreferredSize(new Dimension(400,600));
+                scrollPane.setPreferredSize(new Dimension(400, 600));
                 frame.add(scrollPane);
                 frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 frame.setVisible(true);
@@ -350,6 +389,9 @@ public class StudentServiceUI extends JFrame {
         });
     }
 
+    // MODIFIES: addAward, removeAward, showAwards, award, awards
+    // EFFECTS: Configures action commands for buttons,
+    // sets up award-related labels and text fields in the awards panel
     private void addAwardBottom() {
         addAward.setActionCommand("addAward");
         removeAward.setActionCommand("removeAward");
@@ -376,6 +418,8 @@ public class StudentServiceUI extends JFrame {
         showAwardsAction();
     }
 
+    // MODIFIES: st
+    // EFFECTS: Assigns an action to the addAward button to add an award to the student transcript (st)
     private void addAwardAction() {
         addAward.addActionListener(new ActionListener() {
             @Override
@@ -401,6 +445,8 @@ public class StudentServiceUI extends JFrame {
         });
     }
 
+    // MODIFIES: st
+    // EFFECTS: Assigns an action to the removeAward button to remove an award from the student transcript (st)
     private void removeAwardAction() {
         removeAward.addActionListener(new ActionListener() {
             @Override
@@ -425,12 +471,13 @@ public class StudentServiceUI extends JFrame {
         });
     }
 
+    // EFFECTS: Assigns an action to the showAwards button to display award information in a new JFrame
     private void showAwardsAction() {
         showAwards.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame frame = new JFrame("Award Information");
-                frame.setSize(400,400);
+                frame.setSize(400, 400);
                 frame.setLocationRelativeTo(null);
                 frame.setResizable(false);
                 DefaultListModel<String> listModel = new DefaultListModel<>();
@@ -440,7 +487,7 @@ public class StudentServiceUI extends JFrame {
                 }
                 JList<String> awardList = new JList<>(listModel);
                 JScrollPane scrollPane = new JScrollPane(awardList);
-                scrollPane.setPreferredSize(new Dimension(400,600));
+                scrollPane.setPreferredSize(new Dimension(400, 600));
                 frame.add(scrollPane);
                 frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 frame.setVisible(true);
@@ -448,6 +495,10 @@ public class StudentServiceUI extends JFrame {
         });
     }
 
+    // MODIFIES: showOverallTranscript, showTranscriptBySemester, calculateOverallGpa,
+    // gpaBySemester, transcript, studentTranscript
+    // EFFECTS: Configures action commands for buttons, sets up labels,
+    // and buttons related to the transcript in the studentTranscript panel
     private void addTranscriptBottom() {
 
         showOverallTranscript.setActionCommand("showOverallTranscript");
@@ -469,16 +520,20 @@ public class StudentServiceUI extends JFrame {
         studentTranscript.add(calculateOverallGpa);
         studentTranscript.add(gpaBySemester);
 
-        addTranscriptAction();
+        showOverallTranscriptAction();
+        showTranscriptBySemesterAction();
+        calculateOverallGpaAction();
+        gpaBySemesterAction();
     }
 
-    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
-    public void addTranscriptAction() {
+    // EFFECTS: Assigns an action to the showOverallTranscript button
+    // to display the overall transcript in a new JFrame
+    public void showOverallTranscriptAction() {
         showOverallTranscript.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame frame = new JFrame("Your Transcript");
-                frame.setSize(400,400);
+                frame.setSize(400, 400);
                 frame.setLocationRelativeTo(null);
                 frame.setResizable(false);
 
@@ -496,19 +551,23 @@ public class StudentServiceUI extends JFrame {
                 }
                 JList<String> transcriptList = new JList<>(listModel);
                 JScrollPane scrollPane = new JScrollPane(transcriptList);
-                scrollPane.setPreferredSize(new Dimension(400,600));
+                scrollPane.setPreferredSize(new Dimension(400, 600));
 
                 frame.add(scrollPane);
                 frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 frame.setVisible(true);
             }
         });
+    }
 
+    // EFFECTS: Assigns an action to the showTranscriptBySemester button to display the transcript
+    // for a specific semester in a new JFrame
+    public void showTranscriptBySemesterAction() {
         showTranscriptBySemester.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame frame = new JFrame("Your Transcript");
-                frame.setSize(400,400);
+                frame.setSize(400, 400);
                 frame.setLocationRelativeTo(null);
                 frame.setResizable(false);
 
@@ -530,19 +589,22 @@ public class StudentServiceUI extends JFrame {
 
                 JList<String> transcriptList = new JList<>(listModel);
                 JScrollPane scrollPane = new JScrollPane(transcriptList);
-                scrollPane.setPreferredSize(new Dimension(400,600));
+                scrollPane.setPreferredSize(new Dimension(400, 600));
 
                 frame.add(scrollPane);
                 frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 frame.setVisible(true);
             }
         });
+    }
 
+    // EFFECTS: Assigns an action to the calculateOverallGpa button to display the overall GPA in a new JFrame
+    public void calculateOverallGpaAction() {
         calculateOverallGpa.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame frame = new JFrame("Your Overall GPS");
-                frame.setSize(400,400);
+                frame.setSize(400, 400);
                 frame.setLocationRelativeTo(null);
                 frame.setResizable(false);
 
@@ -567,19 +629,23 @@ public class StudentServiceUI extends JFrame {
 
                 JList<String> transcriptList = new JList<>(listModel);
                 JScrollPane scrollPane = new JScrollPane(transcriptList);
-                scrollPane.setPreferredSize(new Dimension(400,600));
+                scrollPane.setPreferredSize(new Dimension(400, 600));
 
                 frame.add(scrollPane);
                 frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 frame.setVisible(true);
             }
         });
+    }
 
+    // EFFECTS: Assigns an action to the gpaBySemester button to
+    // display the GPA for a specific semester in a new JFrame
+    public void gpaBySemesterAction() {
         gpaBySemester.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFrame frame = new JFrame("Your Overall GPS");
-                frame.setSize(400,400);
+                JFrame frame = new JFrame("Your Overall GPA");
+                frame.setSize(400, 400);
                 frame.setLocationRelativeTo(null);
                 frame.setResizable(false);
 
@@ -591,37 +657,39 @@ public class StudentServiceUI extends JFrame {
                 listModel.addElement("\n");
 
                 String semester = JOptionPane.showInputDialog("Enter the semester you want to choose: ");
-                for (Course next : st.getCourses()) {
-                    if (semester.equals(next.getSemester())) {
-                        bySemester.add(next);
-                    }
-                }
-
-                int allGrades = 0;
-                int allCredits = 0;
-
-                if (!bySemester.isEmpty()) {
-                    for (Course next : bySemester) {
-                        allGrades += next.getGrade() * next.getCredits();
-                        allCredits += next.getCredits();
+                if (semester != null) {
+                    for (Course next : st.getCourses()) {
+                        if (semester.equals(next.getSemester())) {
+                            bySemester.add(next);
+                        }
                     }
 
-                    double result = (double) allGrades / allCredits;
-                    listModel.addElement(String.valueOf((int) (result + 0.5)));
+                    int allGrades = 0;
+                    int allCredits = 0;
+
+                    if (!bySemester.isEmpty()) {
+                        for (Course next : bySemester) {
+                            allGrades += next.getGrade() * next.getCredits();
+                            allCredits += next.getCredits();
+                        }
+
+                        double result = (double) allGrades / allCredits;
+                        listModel.addElement(String.valueOf((int) (result + 0.5)));
+                    }
+
+                    JList<String> transcriptList = new JList<>(listModel);
+                    JScrollPane scrollPane = new JScrollPane(transcriptList);
+                    scrollPane.setPreferredSize(new Dimension(400, 600));
+
+                    frame.add(scrollPane);
+                    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                    frame.setVisible(true);
                 }
-
-                JList<String> transcriptList = new JList<>(listModel);
-                JScrollPane scrollPane = new JScrollPane(transcriptList);
-                scrollPane.setPreferredSize(new Dimension(400,600));
-
-                frame.add(scrollPane);
-                frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                frame.setVisible(true);
             }
         });
-
     }
 
+    // represents main
     public static void main(String[] args) {
         try {
             new StudentServiceUI();

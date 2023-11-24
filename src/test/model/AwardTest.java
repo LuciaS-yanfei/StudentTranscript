@@ -35,4 +35,14 @@ public class AwardTest {
 
     }
 
+    @Test
+    public void testToString(){
+        testAward.setAwardName("IwonAgain");
+        testAward.setDate(2023);
+        testAward.setPrize(100);
+
+        assertEquals("IwonAgain win in 2023 prize is: 100.0\n", testAward.toString());
+//        awardName + " win in " + year + " prize is: " + awardMoney + "\n"
+    }
+
 }

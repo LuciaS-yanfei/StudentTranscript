@@ -54,7 +54,7 @@ public class Award implements Writable {
 
     @Override
     public String toString() {
-        return awardName + " win in" + year + " prize is: " + awardMoney + "\n";
+        return awardName + " win in " + year + " prize is: " + awardMoney + "\n";
     }
 
 }
