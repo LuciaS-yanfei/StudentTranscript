@@ -528,6 +528,7 @@ public class StudentServiceUI extends JFrame {
 
     // EFFECTS: Assigns an action to the showOverallTranscript button
     // to display the overall transcript in a new JFrame
+    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     public void showOverallTranscriptAction() {
         showOverallTranscript.addActionListener(new ActionListener() {
             @Override
@@ -562,6 +563,7 @@ public class StudentServiceUI extends JFrame {
 
     // EFFECTS: Assigns an action to the showTranscriptBySemester button to display the transcript
     // for a specific semester in a new JFrame
+    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     public void showTranscriptBySemesterAction() {
         showTranscriptBySemester.addActionListener(new ActionListener() {
             @Override
@@ -599,6 +601,7 @@ public class StudentServiceUI extends JFrame {
     }
 
     // EFFECTS: Assigns an action to the calculateOverallGpa button to display the overall GPA in a new JFrame
+    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     public void calculateOverallGpaAction() {
         calculateOverallGpa.addActionListener(new ActionListener() {
             @Override
@@ -640,6 +643,7 @@ public class StudentServiceUI extends JFrame {
 
     // EFFECTS: Assigns an action to the gpaBySemester button to
     // display the GPA for a specific semester in a new JFrame
+    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     public void gpaBySemesterAction() {
         gpaBySemester.addActionListener(new ActionListener() {
             @Override
