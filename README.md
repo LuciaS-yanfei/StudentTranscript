@@ -54,6 +54,6 @@ by input the name of course you want to remove in the provided text fields and t
 "shouTranscriptBySemester" and type in the semester you want to see the semester transcript.
 - The same operation for three sections (Course, Award, Transcript)
 - You can calculate GPA using the gpa calculator and it can also calculate each semester's gpa.
-- You can locate my visual component by checking the menuBar.
+- You can locate my visual component by checking the menuBar-show.
 - You can save the state of my application by clicking "file" in the menu bar and select "save" in the drop-down menu 
 - You can reload the state of my application by clicking "file" in the menu bar and select "load" in the drop-down menu

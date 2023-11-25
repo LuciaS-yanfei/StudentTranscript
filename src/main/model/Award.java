@@ -52,6 +52,7 @@ public class Award implements Writable {
         return json;
     }
 
+    // EFFECTS: returns a string of award information
     @Override
     public String toString() {
         return awardName + " win in " + year + " prize is: " + awardMoney + "\n";

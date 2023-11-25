@@ -63,6 +63,7 @@ public class Course implements Writable {
         this.courseAverage = courseAverage;
     }
 
+    // EFFECTS: returns a string of course information
     @Override
     public String toString() {
         return courseName + " in " + semester + " is worth " + credits + " credits "
