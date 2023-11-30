@@ -2,15 +2,15 @@ package ui;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import model.Award;
+import model.EventLog;
+import model.Event;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
@@ -96,7 +96,25 @@ public class StudentServiceUI extends JFrame {
         addAwardBottom();
         addTranscriptBottom();
 
+        // Add a WindowListener to perform actions when the window is closing
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                handleWindowClosing();
+            }
+        });
+
         setVisible(true);
+    }
+
+    // EFFECTS: Prints the event log to the console, indicating that the window is closing
+    // The event log includes each event's string representation.
+    private void handleWindowClosing() {
+        System.out.println("Window is closing. Event log:");
+
+        for (Event next : EventLog.getInstance()) {
+            System.out.println(next.toString());
+        }
     }
 
     // MODIFIES: this
@@ -180,6 +198,7 @@ public class StudentServiceUI extends JFrame {
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, ActionEvent.ALT_MASK));
         menuItem.addActionListener(new DisplayPicture());
         menu.add(menuItem);
+
     }
 
     // MODIFIES: st, JSON_STORE
@@ -226,7 +245,7 @@ public class StudentServiceUI extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String desktopPath = "/Users/songyanfei/Desktop";
+            String desktopPath = "data";
             JFrame pictureFrame = new JFrame("School Picture");
             pictureFrame.setSize(1500, 1200);
 

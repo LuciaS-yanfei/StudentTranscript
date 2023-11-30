@@ -59,6 +59,7 @@ public class StudentTranscript implements Writable {
     public void addCourse(Course course) {
         if (!courses.contains(course)) {
             courses.add(course);
+            EventLog.getInstance().logEvent(new Event("Course Added"));
         }
     }
 
@@ -68,6 +69,7 @@ public class StudentTranscript implements Writable {
     //EFFECTS: remove a course from student transcript if that course is in the list
     public void removeCourse(Course course) {
         courses.remove(course);
+        EventLog.getInstance().logEvent(new Event("Course Removed."));
     }
 
 
@@ -125,6 +127,7 @@ public class StudentTranscript implements Writable {
     public void addAward(Award award) {
         if (!awards.contains(award)) {
             awards.add(award);
+            EventLog.getInstance().logEvent(new Event("Award Added."));
         }
     }
 
@@ -133,6 +136,7 @@ public class StudentTranscript implements Writable {
     //EFFECTS: remove award to student transcript if that award is already in the list
     public void removeAward(Award award) {
         awards.remove(award);
+        EventLog.getInstance().logEvent(new Event("Award Removed."));
     }
 
     //REQUIRES: a list of awards in the transcript
