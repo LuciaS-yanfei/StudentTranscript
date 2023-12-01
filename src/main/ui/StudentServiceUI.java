@@ -552,32 +552,36 @@ public class StudentServiceUI extends JFrame {
         showOverallTranscript.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFrame frame = new JFrame("Your Transcript");
-                frame.setSize(400, 400);
-                frame.setLocationRelativeTo(null);
-                frame.setResizable(false);
-
-                DefaultListModel<String> listModel = new DefaultListModel<>();
-
-                listModel.addElement(st.getStudentName());
-                listModel.addElement(String.valueOf(st.getStudentID()));
-                listModel.addElement("\n");
-
-                for (Course next : st.getCourses()) {
-                    listModel.addElement(next.toString());
-                }
-                for (Award next : st.getAwards()) {
-                    listModel.addElement(next.toString());
-                }
-                JList<String> transcriptList = new JList<>(listModel);
-                JScrollPane scrollPane = new JScrollPane(transcriptList);
-                scrollPane.setPreferredSize(new Dimension(400, 600));
-
-                frame.add(scrollPane);
-                frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                frame.setVisible(true);
+                showTranscript();
             }
         });
+    }
+
+    private void showTranscript() {
+        JFrame frame = new JFrame("Your Transcript");
+        frame.setSize(400, 400);
+        frame.setLocationRelativeTo(null);
+        frame.setResizable(false);
+
+        DefaultListModel<String> listModel = new DefaultListModel<>();
+
+        listModel.addElement(st.getStudentName());
+        listModel.addElement(String.valueOf(st.getStudentID()));
+        listModel.addElement("\n");
+
+        for (Course next : st.getCourses()) {
+            listModel.addElement(next.toString());
+        }
+        for (Award next : st.getAwards()) {
+            listModel.addElement(next.toString());
+        }
+        JList<String> transcriptList = new JList<>(listModel);
+        JScrollPane scrollPane = new JScrollPane(transcriptList);
+        scrollPane.setPreferredSize(new Dimension(400, 600));
+
+        frame.add(scrollPane);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setVisible(true);
     }
 
     // EFFECTS: Assigns an action to the showTranscriptBySemester button to display the transcript
