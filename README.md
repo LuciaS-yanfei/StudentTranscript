@@ -57,3 +57,10 @@ by input the name of course you want to remove in the provided text fields and t
 - You can locate my visual component by checking the menuBar-show.
 - You can save the state of my application by clicking "file" in the menu bar and select "save" in the drop-down menu 
 - You can reload the state of my application by clicking "file" in the menu bar and select "load" in the drop-down menu
+
+## Phase 4: Task 3
+
+If I had more time to work on the project, I want to make the display more beautiful and simple, 
+the design will be changed to a more user-friendly design. Code-wise I want to separate the roles of each part into 
+different classes so that it's easier to add or subtract functionality later on.
+
